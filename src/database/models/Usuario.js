@@ -3,7 +3,15 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Usuario extends Model {}
+  class Usuario extends Model {
+    static associate(models) {
+      Usuario.belongsToMany(models.Diretoria, {
+        through: 'UserDiretoria',
+        as: 'diretorias',
+        foreignKey: 'id_usuario'
+      })
+    }
+  }
   Usuario.init({
     update_at: {
       type: DataTypes.DATE,

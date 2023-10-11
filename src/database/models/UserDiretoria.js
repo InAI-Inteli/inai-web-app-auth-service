@@ -3,29 +3,32 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Diretoria extends Model {
+  class UserDiretoria extends Model {
     static associate(models) {
-      Diretoria.belongsToMany(models.Usuario, {
-        through: 'UserDiretoria',
-        as: 'usuarios',
-        foreignKey: 'id_diretoria'
-      })
+      UserDiretoria.belongsTo(models.Usuario, {
+        foreignKey: 'id_usuario',
+        as: 'usuario'
+      });
+      UserDiretoria.belongsTo(models.Diretoria, {
+        foreignKey: 'id_diretoria',
+        as: 'diretoria'
+      });
     }
   }
-  Diretoria.init({
-    id_diretoria: {
+  UserDiretoria.init({
+    id_userdiretoria: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true
     },
-    nome_diretoria: {
-      type: DataTypes.STRING,
+    id_usuario: {
+      type: DataTypes.INTEGER,
       allowNull: false
     },
-    descricao: {
-      type: DataTypes.STRING,
-      allowNull: true
+    id_diretoria: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     created_at: {
       type: DataTypes.DATE,
@@ -39,11 +42,11 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'Diretoria',
-    tableName: 'diretoria',
+    modelName: 'UserDiretoria',
+    tableName: 'userDiretoria',
     createdAt: 'created_at',
     updatedAt: 'update_at',
     underscore: true
   });
-  return Diretoria;
+  return UserDiretoria;
 };
