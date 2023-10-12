@@ -3,34 +3,32 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Permission extends Model {
+  class PermissionRole extends Model {
     static associate(models) {
-      Permission.belongsToMany(models.Usuario, {
-        through: 'UserPermission',
-        as: 'usuarios',
-        foreignKey: 'id_permissao'
+      PermissionRole.belongsTo(models.Permission, {
+        foreignKey: 'id_permissao',
+        as: 'permissao'
       });
-      Permission.belongsToMany(models.Role, {
-        through: 'PermissionRole',
-        as: 'cargos',
-        foreignKey: 'id_permissao'
+      PermissionRole.belongsTo(models.Role, {
+        foreignKey: 'id_cargo',
+        as: 'cargo'
       });
     }
   }
-  Permission.init({
-    id_permissao: {
+  PermissionRole.init({
+    id_permissaorole: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true
     },
-    nome_permissao: {
-      type: DataTypes.STRING,
+    id_permissao: {
+      type: DataTypes.INTEGER,
       allowNull: false
     },
-    descricao: {
-      type: DataTypes.STRING,
-      allowNull: true
+    id_cargo: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     created_at: {
       type: DataTypes.DATE,
@@ -44,11 +42,11 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'Permission',
-    tableName: 'permission',
+    modelName: 'PermissionRole',
+    tableName: 'permissionRole',
     createdAt: 'created_at',
     updatedAt: 'update_at',
     underscore: true
   });
-  return Permission;
+  return PermissionRole;
 };
