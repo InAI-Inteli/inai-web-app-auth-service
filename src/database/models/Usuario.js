@@ -9,7 +9,12 @@ module.exports = (sequelize, DataTypes) => {
         through: 'UserDiretoria',
         as: 'diretorias',
         foreignKey: 'id_usuario'
-      })
+      });
+      Usuario.belongsToMany(models.Role, {
+        through: 'UserRole',
+        as: 'roles',
+        foreignKey: 'id_usuario'
+      });
     }
   }
   Usuario.init({

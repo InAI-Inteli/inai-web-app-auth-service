@@ -3,29 +3,32 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Role extends Model {
+  class UserRole extends Model {
     static associate(models) {
-      Role.belongsToMany(models.Usuario, {
-        through: 'UserRole',
-        as: 'usuarios',
-        foreignKey: 'id_cargo'
+      UserRole.belongsTo(models.Usuario, {
+        foreignKey: 'id_usuario',
+        as: 'usuario'
+      });
+      UserRole.belongsTo(models.Role, {
+        foreignKey: 'id_cargo',
+        as: 'cargo'
       });
     }
   }
-  Role.init({
-    id_cargo: {
+  UserRole.init({
+    id_userrole: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true
     },
-    nome_cargo: {
-      type: DataTypes.STRING,
+    id_usuario: {
+      type: DataTypes.INTEGER,
       allowNull: false
     },
-    descricao: {
-      type: DataTypes.STRING,
-      allowNull: true
+    id_cargo: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     created_at: {
       type: DataTypes.DATE,
@@ -39,11 +42,11 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'Role',
-    tableName: 'role',
+    modelName: 'UserRole',
+    tableName: 'userRole',
     createdAt: 'created_at',
     updatedAt: 'update_at',
     underscore: true
   });
-  return Role;
+  return UserRole;
 };
