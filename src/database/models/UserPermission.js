@@ -3,29 +3,32 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Permission extends Model {
+  class UserPermission extends Model {
     static associate(models) {
-      Permission.belongsToMany(models.Usuario, {
-        through: 'UserPermission',
-        as: 'usuarios',
-        foreignKey: 'id_permissao'
+      UserPermission.belongsTo(models.Usuario, {
+        foreignKey: 'id_usuario',
+        as: 'usuario'
+      });
+      UserPermission.belongsTo(models.Permission, {
+        foreignKey: 'id_permissao',
+        as: 'permissao'
       });
     }
   }
-  Permission.init({
-    id_permissao: {
+  UserPermission.init({
+    id_userpermissao: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true
     },
-    nome_permissao: {
-      type: DataTypes.STRING,
+    id_usuario: {
+      type: DataTypes.INTEGER,
       allowNull: false
     },
-    descricao: {
-      type: DataTypes.STRING,
-      allowNull: true
+    id_permissao: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     created_at: {
       type: DataTypes.DATE,
@@ -39,11 +42,11 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'Permission',
-    tableName: 'permission',
+    modelName: 'UserPermission',
+    tableName: 'userPermission',
     createdAt: 'created_at',
     updatedAt: 'update_at',
     underscore: true
   });
-  return Permission;
+  return UserPermission;
 };
