@@ -5,6 +5,7 @@ const router = Router();
 
 router
   .get('/usuarios', UsuarioController.listarUsuarios)
+  .get('/usuarios/:id', UsuarioController.buscarUsuario)
   .put('/usuarios/:id', UsuarioController.atualizarUsuario)
   .post('/usuarios', UsuarioController.cadastrarUsuario);
 

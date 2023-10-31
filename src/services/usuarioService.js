@@ -48,6 +48,13 @@ class UsuarioService extends Service {
     return usuarios;
   }
 
+  async buscarUsuario(id) {
+    const usuario = await this.buscaRegistroPorID(
+      id,
+      {attributes: ['nome', 'nome_usuario', 'email', 'imagem', 'status']});
+
+    return usuario;
+  }
 }
 
 module.exports = UsuarioService;

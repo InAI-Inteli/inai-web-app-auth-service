@@ -57,6 +57,20 @@ class UsuarioController {
       res.status(400).json({ message: erro.message });
     }
   }
+
+  static async buscarUsuario(req, res) {
+    try {
+      const usuario = await usuarioService.buscarUsuario(req.params.id);
+
+      if (!usuario) {
+        return res.status(404).json({ message: 'Usuário não encontrado' });
+      }
+
+      res.status(200).json(usuario);
+    } catch (erro) {
+      res.status(400).json({ message: erro.message });
+    }
+  }
 }
 
 module.exports = UsuarioController;
