@@ -40,6 +40,14 @@ class UsuarioService extends Service {
     return usuarioAtualizado;
   }
 
+  async listarUsuarios() {
+    const usuarios = await this.listaRegistros(
+      ['id', 'nome', 'nome_usuario', 'email']
+    )
+
+    return usuarios;
+  }
+
 }
 
 module.exports = UsuarioService;

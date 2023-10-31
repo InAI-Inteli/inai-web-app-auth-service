@@ -47,6 +47,16 @@ class UsuarioController {
       res.status(400).json({ message: erro.message });
     }
   }
+
+  static async listarUsuarios(req, res) {
+    try {
+      const usuarios = await usuarioService.listarUsuarios();
+
+      res.status(200).json(usuarios);
+    } catch (erro) {
+      res.status(400).json({ message: erro.message });
+    }
+  }
 }
 
 module.exports = UsuarioController;
