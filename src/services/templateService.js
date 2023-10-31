@@ -24,10 +24,9 @@ class Service {
 
   async atualizaRegistro(dadosAtualizados, id, transacao = {}) {
     return database[this.nomeDoModelo]
-      .update(dadosAtualizados, transacao)
-      .where({
-        id: id
-      });
+      .update(dadosAtualizados,
+        {where: {id: id}},
+        transacao);
   }
 
   async apagaRegistro(id) {

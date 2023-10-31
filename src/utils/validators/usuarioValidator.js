@@ -17,6 +17,19 @@ class UsuarioValidator extends ValidatorBase {
 
     this.language = language;
   }
+
+  validateAtualizacao(dados) {
+    const schema = Joi.object({
+      nome: Joi.string().min(3).messages(customMessages[this.language]),
+      email: Joi.string().email({ minDomainSegments: 2 }).messages(customMessages[this.language]),
+      senha:  Joi.string().min(6).max(50).messages(customMessages[this.language]),
+      status: Joi.boolean().messages(customMessages[this.language]),
+      nome_usuario: Joi.string().min(3).messages(customMessages[this.language]),
+      imagem: Joi.string().messages(customMessages[this.language])
+    }).or('nome', 'email', 'senha', 'status', 'nome_usuario', 'imagem').messages(customMessages[this.language]);
+
+    return schema.validate(dados);
+  }
 }
 
 module.exports = UsuarioValidator;

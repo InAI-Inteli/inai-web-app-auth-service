@@ -3,7 +3,7 @@ const Service = require('./templateService');
 
 class UsuarioService extends Service {
   constructor() {
-    super('Usuario');
+    super('Usuarios');
   }
 
   async cadastrarUsuario(dto) {
@@ -26,6 +26,18 @@ class UsuarioService extends Service {
     const novoUsuario = await this.criaRegistro(dto);
 
     return novoUsuario;
+  }
+
+  async atualizarUsuario(dto) {
+    const usuario = await database.Usuarios.findByPk(dto.id);
+
+    if (!usuario) {
+      return -1;
+    }
+
+    const usuarioAtualizado = await this.atualizaRegistro(dto, dto.id);
+
+    return usuarioAtualizado;
   }
 
 }
