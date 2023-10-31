@@ -1,21 +1,10 @@
 const UsuarioService = require('../services/usuarioService');
 const usuarioService = new UsuarioService();
-const UsuarioValidator = require('../utils/validators/usuarioValidator');
-
 
 class UsuarioController {
   static async cadastrarUsuario(req, res) {
-    const language = req.headers['accept-language'] || 'pt-br';
-    const validator = new UsuarioValidator(language);
-
-    const { error, value } = validator.validate(req.body);
-
-    if (error) {
-      return res.status(400).json({message: error.details[0].message});
-    }
-
     try {
-      const usuario = await usuarioService.cadastrarUsuario(value);
+      const usuario = await usuarioService.cadastrarUsuario(req.body);
 
       res.status(201).json(usuario);
     } catch (erro) {
@@ -24,19 +13,10 @@ class UsuarioController {
   }
 
   static async atualizarUsuario(req, res) {
-    const language = req.headers['accept-language'] || 'pt-br';
-    const validator = new UsuarioValidator(language);
-
-    const { error, value } = validator.validateAtualizacao(req.body);
-
-    if (error) {
-      return res.status(400).json({message: error.details[0].message});
-    }
-
-    value.id = req.params.id
+    req.body.id = req.params.id
 
     try {
-      const usuario = await usuarioService.atualizarUsuario(value);
+      const usuario = await usuarioService.atualizarUsuario(req.body);
 
       if (usuario === -1) {
         return res.status(404).json({ message: 'Usuário não encontrado' });

@@ -19,6 +19,7 @@ class UsuarioValidator extends ValidatorBase {
   }
 
   validateAtualizacao(dados) {
+    console.log(dados)
     const schema = Joi.object({
       nome: Joi.string().min(3).messages(customMessages[this.language]),
       email: Joi.string().email({ minDomainSegments: 2 }).messages(customMessages[this.language]),
