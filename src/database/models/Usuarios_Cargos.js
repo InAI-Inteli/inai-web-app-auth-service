@@ -3,20 +3,20 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class UserRole extends Model {
+  class Usuarios_Cargos extends Model {
     static associate(models) {
-      UserRole.belongsTo(models.Usuario, {
+      Usuarios_Cargos.belongsTo(models.Usuarios, {
         foreignKey: 'id_usuario',
         as: 'usuario'
       });
-      UserRole.belongsTo(models.Role, {
+      Usuarios_Cargos.belongsTo(models.Cargos, {
         foreignKey: 'id_cargo',
         as: 'cargo'
       });
     }
   }
-  UserRole.init({
-    id_userrole: {
+  Usuarios_Cargos.init({
+    id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
@@ -35,18 +35,18 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: DataTypes.NOW
     },
-    update_at: {
+    updated_at: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW
     },
   }, {
     sequelize,
-    modelName: 'UserRole',
-    tableName: 'userRole',
+    modelName: 'Usuarios_Cargos',
+    tableName: 'usuarios_cargos',
     createdAt: 'created_at',
-    updatedAt: 'update_at',
+    updatedAt: 'updated_at',
     underscore: true
   });
-  return UserRole;
+  return Usuarios_Cargos;
 };

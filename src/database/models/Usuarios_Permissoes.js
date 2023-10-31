@@ -3,30 +3,30 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class PermissionRole extends Model {
+  class Usuarios_Permissoes extends Model {
     static associate(models) {
-      PermissionRole.belongsTo(models.Permission, {
+      Usuarios_Permissoes.belongsTo(models.Usuarios, {
+        foreignKey: 'id_usuario',
+        as: 'usuario'
+      });
+      Usuarios_Permissoes.belongsTo(models.Permissoes, {
         foreignKey: 'id_permissao',
         as: 'permissao'
       });
-      PermissionRole.belongsTo(models.Role, {
-        foreignKey: 'id_cargo',
-        as: 'cargo'
-      });
     }
   }
-  PermissionRole.init({
-    id_permissaorole: {
+  Usuarios_Permissoes.init({
+    id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true
     },
-    id_permissao: {
+    id_usuario: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    id_cargo: {
+    id_permissao: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
@@ -35,18 +35,18 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: DataTypes.NOW
     },
-    update_at: {
+    updated_at: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW
     },
   }, {
     sequelize,
-    modelName: 'PermissionRole',
-    tableName: 'permissionRole',
+    modelName: 'Usuarios_Permissoes',
+    tableName: 'usuarios_permissoes',
     createdAt: 'created_at',
-    updatedAt: 'update_at',
+    updatedAt: 'updated_at',
     underscore: true
   });
-  return PermissionRole;
+  return Usuarios_Permissoes;
 };
