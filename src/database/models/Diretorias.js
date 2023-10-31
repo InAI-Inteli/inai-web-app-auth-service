@@ -3,28 +3,23 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Permission extends Model {
+  class Diretorias extends Model {
     static associate(models) {
-      Permission.belongsToMany(models.Usuario, {
-        through: 'UserPermission',
-        as: 'usuarios',
-        foreignKey: 'id_permissao'
-      });
-      Permission.belongsToMany(models.Role, {
-        through: 'PermissionRole',
-        as: 'cargos',
-        foreignKey: 'id_permissao'
-      });
+      Diretorias.belongsToMany(models.Usuarios, {
+        through: 'Usuarios_Diretorias',
+        as: 'usuariosDaDiretoria',
+        foreignKey: 'id_diretoria'
+      })
     }
   }
-  Permission.init({
-    id_permissao: {
+  Diretorias.init({
+    id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true
     },
-    nome_permissao: {
+    nome_diretoria: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -37,18 +32,18 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: DataTypes.NOW
     },
-    update_at: {
+    updated_at: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW
     },
   }, {
     sequelize,
-    modelName: 'Permission',
-    tableName: 'permission',
+    modelName: 'Diretorias',
+    tableName: 'diretorias',
     createdAt: 'created_at',
-    updatedAt: 'update_at',
+    updatedAt: 'updated_at',
     underscore: true
   });
-  return Permission;
+  return Diretorias;
 };

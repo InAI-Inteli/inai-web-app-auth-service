@@ -3,27 +3,27 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Usuario extends Model {
+  class Usuarios extends Model {
     static associate(models) {
-      Usuario.belongsToMany(models.Diretoria, {
-        through: 'UserDiretoria',
-        as: 'diretorias',
+      Usuarios.belongsToMany(models.Diretorias, {
+        through: 'Usuarios_Diretorias',
+        as: 'diretoriasDoUsuario',
         foreignKey: 'id_usuario'
       });
-      Usuario.belongsToMany(models.Role, {
-        through: 'UserRole',
-        as: 'roles',
+      Usuarios.belongsToMany(models.Cargos, {
+        through: 'Usuarios_Cargos',
+        as: 'cargosDoUsuario',
         foreignKey: 'id_usuario'
       });
-      Usuario.belongsToMany(models.Permission, {
-        through: 'UserPermission',
-        as: 'permissoes',
+      Usuarios.belongsToMany(models.Permissoes, {
+        through: 'Usuarios_Permissoes',
+        as: 'permissoesDoUsuario',
         foreignKey: 'id_usuario'
       });
     }
   }
-  Usuario.init({
-    update_at: {
+  Usuarios.init({
+    updated_at: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW
@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: DataTypes.NOW
     },
-    id_usuario: {
+    id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
@@ -67,11 +67,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Usuario',
-    tableName: 'usuario',
+    modelName: 'Usuarios',
+    tableName: 'usuarios',
     createdAt: 'created_at',
-    updatedAt: 'update_at',
+    updatedAt: 'updated_at',
     underscore: true
   });
-  return Usuario;
+  return Usuarios;
 };
