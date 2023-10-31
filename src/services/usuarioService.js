@@ -10,7 +10,7 @@ class UsuarioService extends Service {
     // verifica se já existe um usuário com o mesmo email, ou
     // caso o nome_usuario tenha sido informado, se já existe um usuário
     // com o mesmo nome_usuario
-    const usuario = await database.Usuario.findOne({
+    const usuario = await database.Usuarios.findOne({
       where: {
         [database.Sequelize.Op.or]: [
           { email: dto.email },
