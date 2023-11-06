@@ -51,6 +51,18 @@ class UsuarioController {
       res.status(400).json({ message: erro.message });
     }
   }
+
+  static async alterarStatus(req, res) {
+    try {
+      const usuario = req.params.id;
+
+      await usuarioService.alterarStatus(usuario);
+
+      res.status(204).send()
+    } catch (erro) {
+      res.status(400).json({ message: erro.message });
+    }
+  }
 }
 
 module.exports = UsuarioController;

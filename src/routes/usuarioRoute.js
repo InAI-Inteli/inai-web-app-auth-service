@@ -8,6 +8,7 @@ router
   .get('/usuarios', UsuarioController.listarUsuarios)
   .get('/usuarios/:id', UsuarioController.buscarUsuario)
   .put('/usuarios/:id', validaDTO('usuarios'), UsuarioController.atualizarUsuario)
+  .post('/usuarios/:id/alterar-status', UsuarioController.alterarStatus)
   .post('/usuarios', validaDTO('usuarios'), UsuarioController.cadastrarUsuario);
 
 module.exports = router;
