@@ -55,6 +55,22 @@ class UsuarioService extends Service {
 
     return usuario;
   }
+
+  async alterarStatus(id) {
+    // ativa ou inativa o usuário, definindo o status como true ou false
+    // de acordo com o dado atual no banco de dados
+    const usuario = await this.buscaRegistroPorID(id)
+
+    if (!usuario) {
+      return -1;
+    }
+
+    const novoStatus = !usuario.status;
+
+    await this.atualizaRegistro({ status: novoStatus }, id);
+
+    return novoStatus;
+  }
 }
 
 module.exports = UsuarioService;
