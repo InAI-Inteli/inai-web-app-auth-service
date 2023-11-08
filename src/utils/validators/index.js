@@ -1,6 +1,7 @@
 const usuarioValidator = require('./usuarioValidator');
 const templateValidator = require('./templateValidator');
 const diretoriaValidator = require('./diretoriaValidator');
+const membroDiretoriaValidator = require('./membroDiretoriaValidator')
 
 class ValidatorFactory {
     static getValidator(validatorName) {
@@ -11,6 +12,8 @@ class ValidatorFactory {
             return templateValidator;
         case 'diretorias':
             return diretoriaValidator;
+        case 'membro-diretoria':
+            return membroDiretoriaValidator;
         default:
             return null;
         }

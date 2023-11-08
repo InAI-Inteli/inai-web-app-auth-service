@@ -49,6 +49,22 @@ class DiretoriaController {
       res.status(400).json({ message: erro.message });
     }
   }
+
+  static async vincularUsuarios(req, res) {
+    try {
+      const diretoria = await diretoriaService.vincularUsuarios(req.body);
+
+      if (diretoria === -1) {
+        return res.status(404).json({ message: 'Diretoria não encontrada' });
+      } else if (diretoria == -2) {
+        return res.status(404).json({ message: 'Usuário não encontrado' });
+      }
+
+      res.status(200).json(diretoria);
+    } catch (erro) {
+      res.status(400).json({ message: erro.message });
+    }
+  }
 }
 
 module.exports = DiretoriaController;

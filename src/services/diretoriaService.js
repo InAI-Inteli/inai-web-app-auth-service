@@ -33,6 +33,29 @@ class DiretoriaService extends Service {
 
     return novaDiretoria;
   }
+
+  async vincularUsuarios(dto) {
+    const diretoria = await database.Diretorias.findByPk(dto.id_diretoria);
+
+    if (!diretoria) {
+      return -1;
+    }
+
+    const usuario = await database.Usuarios.findByPk(dto.id_usuario);
+
+    if (!usuario) {
+      return -2;
+    }
+
+    const usuarioDiretoria = await database.Usuarios_Diretorias.findOrCreate({
+      where: {
+        id_usuario: dto.id_usuario,
+        id_diretoria: dto.id_diretoria
+      }
+    });
+
+    return usuarioDiretoria;
+  }
 }
 
 module.exports = DiretoriaService;
