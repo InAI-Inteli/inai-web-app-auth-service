@@ -7,7 +7,7 @@ const router = Router();
 router
   .get('/cargos', )
   .get('/cargos/:id')  
-  .put('/cargos/:id')
+  .put('/cargos/:id', validaDTO('cargos'), CargoController.atualizarCargo)
   .post('/cargos', validaDTO('cargos'), CargoController.cadastrarCargo);
 
 module.exports = router;

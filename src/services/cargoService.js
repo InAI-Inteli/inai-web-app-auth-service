@@ -21,6 +21,18 @@ class CargoService extends Service {
 
     return novoCargo;
   }
+
+  async atualizarCargo(dto) {
+    const cargo = await database.Cargos.findByPk(dto.id);
+
+    if (!cargo) {
+      return -1;
+    }
+
+    const novoCargo = await cargo.update(dto);
+
+    return novoCargo;
+  }
 }
 
 module.exports = CargoService;
