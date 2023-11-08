@@ -14,7 +14,7 @@ class CargoService extends Service {
     });
 
     if (cargo) {
-      return -1;
+      return cargo;
     }
 
     const novoCargo = await this.criaRegistro(dto);

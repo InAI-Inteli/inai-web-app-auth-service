@@ -5,8 +5,8 @@ const validaDTO = require('../middlewares/validaDTO')
 const router = Router();
 
 router
-  .get('/cargos', )
-  .get('/cargos/:id')  
+  .get('/cargos', CargoController.listarCargos)
+  .get('/cargos/:id', CargoController.listarCargo)  
   .put('/cargos/:id', validaDTO('cargos'), CargoController.atualizarCargo)
   .post('/cargos', validaDTO('cargos'), CargoController.cadastrarCargo);
 
