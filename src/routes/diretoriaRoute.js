@@ -7,6 +7,7 @@ const router = Router();
 router
   .get('/diretorias', DiretoriaController.listarDiretorias)
   .get('/diretorias/:id', DiretoriaController.listaDiretoria)
+  .get('/diretorias/:id/membros', DiretoriaController.listarUsuarios)
   .put('/diretorias/:id', validaDTO('diretorias'), DiretoriaController.atualizarDiretoria)
   .post('/diretorias/adicionar-membro', validaDTO('membro-diretoria'), DiretoriaController.vincularUsuarios)
   .post('/diretorias/remover-membro', validaDTO('membro-diretoria'), DiretoriaController.removerUsuarios)

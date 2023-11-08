@@ -79,6 +79,29 @@ class DiretoriaService extends Service {
 
     return usuarioDiretoria;
   }
+
+  async listarUsuarios(dto) {
+    const diretoria = await database.Diretorias.findByPk(dto.id);
+
+    if (!diretoria) {
+      return -1;
+    }
+
+    const membros = await database.Usuarios_Diretorias.findAll({
+      where: {
+        id_diretoria: dto.id
+      }
+    });
+
+    const usuarios = await database.Usuarios.findAll({
+      where: {
+        id: membros.map(membro => membro.id_usuario)
+      },
+      attributes: ['id', 'nome', 'nome_usuario', 'email']
+    })
+
+    return usuarios;
+  }
 }
 
 module.exports = DiretoriaService;
