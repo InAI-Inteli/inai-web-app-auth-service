@@ -1,5 +1,6 @@
 const bodyParser = require('body-parser');
 const usuario = require('./usuarioRoute');
+const diretoria = require('./diretoriaRoute');
 
 // Exporta as rotas numa função para serem usadas no index.js
 module.exports = function(app) {
@@ -8,6 +9,7 @@ module.exports = function(app) {
     res.json({ message: 'API Autenticação & Autorização de Usuários' });
   });
   app.use(
-    usuario
+    usuario,
+    diretoria,
   );
 };
