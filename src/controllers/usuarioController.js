@@ -63,6 +63,20 @@ class UsuarioController {
       res.status(400).json({ message: erro.message });
     }
   }
+
+  static async listarDiretorias(req, res) {
+    try {
+      const diretorias = await usuarioService.listarDiretorias(req.params.id);
+
+      if (diretorias == -1) {
+        return res.status(404).json({ message: 'Usuário não encontrado' });
+      }
+
+      res.status(200).json(diretorias);
+    } catch (erro) {
+      res.status(400).json({ message: erro.message });
+    }
+  }
 }
 
 module.exports = UsuarioController;

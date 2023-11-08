@@ -71,6 +71,29 @@ class UsuarioService extends Service {
 
     return novoStatus;
   }
+
+  async listarDiretorias(id) {
+    const usuario = await database.Usuarios.findByPk(id)
+
+    if (!usuario) {
+      return -1;
+    }
+
+    const vinculos = await database.Usuarios_Diretorias.findAll({
+      where: {
+        id_usuario: id
+      }
+    });
+
+    const diretorias = await database.Diretorias.findAll({
+      where: {
+        id: vinculos.map(vinculo => vinculo.id_diretoria)
+      },
+      attributes: ['id', 'nome_diretoria', 'descricao']
+    });
+
+    return diretorias;
+  }
 }
 
 module.exports = UsuarioService;
