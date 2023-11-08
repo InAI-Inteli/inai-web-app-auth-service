@@ -6,7 +6,7 @@ const router = Router();
 
 router
   .get('/diretorias', DiretoriaController.listarDiretorias)
-  .get('/diretorias/:id')
+  .get('/diretorias/:id', DiretoriaController.listaDiretoria)
   .put('/diretorias/:id', validaDTO('diretorias'), DiretoriaController.atualizarDiretoria)
   .post('/diretorias', validaDTO('diretorias'), DiretoriaController.cadastrarDiretoria);
 
