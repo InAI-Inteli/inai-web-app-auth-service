@@ -21,6 +21,18 @@ class DiretoriaService extends Service {
 
     return novaDiretoria;
   }
+
+  async atualizarDiretoria(dto) {
+    const diretoria = await database.Diretorias.findByPk(dto.id)
+
+    if (!diretoria) {
+      return -1;
+    }
+
+    const novaDiretoria = await diretoria.update(dto)
+
+    return novaDiretoria;
+  }
 }
 
 module.exports = DiretoriaService;
