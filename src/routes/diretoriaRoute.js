@@ -5,7 +5,7 @@ const validaDTO = require('../middlewares/validaDTO')
 const router = Router();
 
 router
-  .get('/diretorias')
+  .get('/diretorias', DiretoriaController.listarDiretorias)
   .get('/diretorias/:id')
   .put('/diretorias/:id', validaDTO('diretorias'), DiretoriaController.atualizarDiretoria)
   .post('/diretorias', validaDTO('diretorias'), DiretoriaController.cadastrarDiretoria);

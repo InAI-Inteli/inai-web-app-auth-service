@@ -25,6 +25,16 @@ class DiretoriaController {
       res.status(400).json({ message: erro.message });
     }
   }
+
+  static async listarDiretorias(req, res) {
+    try {
+      const diretorias = await diretoriaService.listaRegistros(['id', 'nome_diretoria', 'descricao']);
+
+      res.status(200).json(diretorias);
+    } catch (erro) {
+      res.status(400).json({ message: erro.message });
+    }
+  }
 }
 
 module.exports = DiretoriaController;
