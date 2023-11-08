@@ -33,6 +33,24 @@ class CargoService extends Service {
 
     return novoCargo;
   }
+
+  async vincularUsuarios(dto) {
+    const cargo = await database.Cargos.findByPk(dto.id_cargo);
+
+    if (!cargo) {
+      return -1;
+    }
+
+    const usuario = await database.Usuarios.findByPk(dto.id_usuario);
+
+    if (!usuario) {
+      return -2;
+    }
+
+    const membro = await cargo.addUsuariosDoCargo(usuario);
+
+    return membro;
+  }
 }
 
 module.exports = CargoService;
