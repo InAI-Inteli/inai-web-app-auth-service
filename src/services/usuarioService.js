@@ -94,6 +94,18 @@ class UsuarioService extends Service {
 
     return diretorias;
   }
+
+  async listarCargos(id) {
+    const usuario = await database.Usuarios.findByPk(id);
+
+    if (!usuario) {
+      return -1;
+    }
+
+    const cargos = usuario.getCargosDoUsuario();
+
+    return cargos;
+  }
 }
 
 module.exports = UsuarioService;
