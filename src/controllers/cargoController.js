@@ -67,6 +67,24 @@ class CargoController {
       res.status(400).json({ message: erro.message });
     }
   }
+
+  static async desvincularUsuarios(req, res) {
+    try {
+      const membro = await cargoService.desvincularUsuarios({...req.body});
+
+      if (membro === -1) {
+        return res.status(404).json({ message: 'Cargo não encontrado' });
+      }
+
+      if (membro === -2) {
+        return res.status(404).json({ message: 'Usuário não encontrado' });
+      }
+
+      res.status(200).json(membro);
+    } catch (erro) {
+      res.status(400).json({ message: erro.message });
+    }
+  }
 }
 
 module.exports = CargoController;
