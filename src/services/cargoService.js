@@ -69,6 +69,18 @@ class CargoService extends Service {
 
     return membro;
   }
+
+  async listarMembros(id) {
+    const cargo = await database.Cargos.findByPk(id);
+
+    if (!cargo) {
+      return -1;
+    }
+
+    const membros = await cargo.getUsuariosDoCargo();
+
+    return membros;
+  }
 }
 
 module.exports = CargoService;

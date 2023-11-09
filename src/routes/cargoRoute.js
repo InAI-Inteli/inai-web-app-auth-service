@@ -7,6 +7,7 @@ const router = Router();
 router
   .get('/cargos', CargoController.listarCargos)
   .get('/cargos/:id', CargoController.listarCargo)  
+  .get('/cargos/:id/membros', CargoController.listarMembros)
   .put('/cargos/:id', validaDTO('cargos'), CargoController.atualizarCargo)
   .post('/cargos/adicionar-membro', CargoController.vincularUsuarios)
   .post('/cargos/remover-membro', CargoController.desvincularUsuarios)

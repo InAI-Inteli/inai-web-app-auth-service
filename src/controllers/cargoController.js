@@ -85,6 +85,20 @@ class CargoController {
       res.status(400).json({ message: erro.message });
     }
   }
+
+  static async listarMembros(req, res) {
+    try {
+      const membros = await cargoService.listarMembros(req.params.id);
+
+      if (membros === -1) {
+        return res.status(404).json({ message: 'Cargo não encontrado' });
+      }
+
+      res.status(200).json(membros);
+    } catch (erro) {
+      res.status(400).json({ message: erro.message });
+    }
+  }
 }
 
 module.exports = CargoController;
